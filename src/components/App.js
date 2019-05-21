@@ -8,18 +8,22 @@ import StreamDelete from './Streams/StreamDelete'
 import StreamEdit from './Streams/StreamEdit'
 import StreamList from './Streams/StreamList'
 import StreamShow from './Streams/StreamShow'
+import Header from './Header'
 
 const App = () => (
   <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
-        <Route path={'/streams/delete'} component={StreamDelete} />
-        <Route exact path={'/streams/show'} component={StreamShow} />
-        <Route exact path={'/streams/edit'} component={StreamEdit} />
-        <Route exact path={'/streams/new'} component={StreamCreate} />
-        <Route exact path={'/'} component={StreamList} />
-      </Switch>
-    </BrowserRouter>
+    <div className={'ui container'}>
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route path={'/streams/delete'} component={StreamDelete} />
+          <Route exact path={'/streams/show'} component={StreamShow} />
+          <Route exact path={'/streams/edit'} component={StreamEdit} />
+          <Route exact path={'/streams/new'} component={StreamCreate} />
+          <Route exact path={'/'} component={StreamList} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   </Provider>
 )
 
