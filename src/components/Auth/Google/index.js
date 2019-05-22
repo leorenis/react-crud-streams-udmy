@@ -5,32 +5,23 @@ import * as AuthActions from '../../../actions/auth'
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
-    window.gapi.load('client:auth2', () => {
-      window.gapi.client
-        .init({
-          clientId:
-            '1090905734118-eigdmnvhf5k2t6104g03mvpr974cdgfd.apps.googleusercontent.com',
-          scope: 'email'
-        })
-        .then(() => {
-          this.auth = window.gapi.auth2.getAuthInstance()
-          this.onAuthChange(this.auth.isSignedIn.get())
-          this.auth.isSignedIn.listen(this.onAuthChange)
-        })
-    })
+    const { startGoogleAuth } = this.props
+    startGoogleAuth(this.onAuthChange)
   }
 
   onAuthChange = isSignedIn => {
-    const { signIn, signOut } = this.props
-    isSignedIn ? signIn(this.auth.currentUser.get().getId()) : signOut()
+    const { signIn, signOut, googleAuth } = this.props
+    isSignedIn ? signIn(googleAuth.currentUser.get().getId()) : signOut()
   }
 
   onSignInClick = () => {
-    this.auth.signIn()
+    const { googleAuth } = this.props
+    googleAuth.signIn()
   }
 
   onSignOutClick = () => {
-    this.auth.signOut()
+    const { googleAuth } = this.props
+    googleAuth.signOut()
   }
 
   renderAuthButtonSigOut() {
@@ -66,7 +57,10 @@ class GoogleAuth extends React.Component {
     return this.renderAuthButton()
   }
 }
-const mapStateToProps = ({ auth: { isSignedIn } }) => ({ isSignedIn })
+const mapStateToProps = ({ auth: { isSignedIn, googleAuth } }) => ({
+  isSignedIn,
+  googleAuth
+})
 const mapDispatchToProps = dispatch => bindActionCreators(AuthActions, dispatch)
 export default connect(
   mapStateToProps,
