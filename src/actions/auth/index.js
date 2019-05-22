@@ -1,13 +1,12 @@
-export const TRY_SIGNIN_GOOGLE = '@actionAuth/TRY_SIGNIN_GOOGLE'
-export const TRY_SIGNOUT_GOOGLE = '@actionAuth/TRY_SIGNOUT_GOOGLE'
-export const CHANGE_AUTH = '@actionAuth/CHANGE_AUTH'
+import { SIGNIN_GOOGLE, SIGNOUT_GOOGLE, CHANGE_AUTH } from '../types'
 
-export const trySignIn = () => ({
-  type: TRY_SIGNIN_GOOGLE
+export const signIn = userId => ({
+  type: SIGNIN_GOOGLE,
+  payload: userId
 })
 
-export const trySignOut = () => ({
-  type: TRY_SIGNOUT_GOOGLE
+export const signOut = () => ({
+  type: SIGNOUT_GOOGLE
 })
 
 export const changeAuth = () => ({
