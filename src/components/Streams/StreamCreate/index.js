@@ -1,10 +1,15 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import _ from 'lodash'
 
+import * as StreamActions from '../../../actions/streams'
+
 class StreamCreate extends React.Component {
-  onSubmit(formValues) {
-    console.log(formValues)
+  onSubmit = formValues => {
+    const { saveStream } = this.props
+    saveStream(formValues)
   }
 
   renderError({ error, touched }) {
@@ -60,7 +65,14 @@ const validate = formValues => {
   return errors
 }
 
-export default reduxForm({
+const formWrapped = reduxForm({
   form: 'streamCreateForm',
   validate
 })(StreamCreate)
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(StreamActions, dispatch)
+export default connect(
+  null,
+  mapDispatchToProps
+)(formWrapped)

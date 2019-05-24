@@ -4,7 +4,7 @@ import * as Streams from './streams'
 import * as Auth from './auth'
 
 export default combineReducers({
-    streams: Streams.createdStreamReducer,
+    streams: Streams.streamReducer,
     auth: Auth.authenticatedGoogleReducer,
     form: formReducer
 })

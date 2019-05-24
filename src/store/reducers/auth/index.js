@@ -2,7 +2,7 @@ import {
   SIGNIN_GOOGLE,
   SIGNOUT_GOOGLE,
   START_GOOGLE_AUTH
-} from '../../../actions/types'
+} from '../../../actions/auth/types'
 
 const INITIAL_STATE = {
   isSignedIn: null,

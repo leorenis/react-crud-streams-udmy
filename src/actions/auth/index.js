@@ -3,7 +3,7 @@ import {
   SIGNOUT_GOOGLE,
   CHANGE_AUTH,
   START_GOOGLE_AUTH
-} from '../types'
+} from './types'
 
 export const startGoogleAuth = authChangeCallback => dispatch => {
   window.gapi.load('client:auth2', async () => {
