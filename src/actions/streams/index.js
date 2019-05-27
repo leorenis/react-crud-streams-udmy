@@ -6,10 +6,12 @@ import {
   DELETED_STREAM
 } from './types'
 
-export const saveStream = formvalues => async dispatch => {
+export const saveStream = formvalues => async (dispatch, getState) => {
+  const { userId } = getState().auth
+  const streamToSave = { ...formvalues, userId }
   const response = !formvalues.id
-    ? await streamsApi.post('/streams', formvalues)
-    : await streamsApi.put(`/streams/${formvalues.id}`, formvalues)
+    ? await streamsApi.post('/streams', streamToSave)
+    : await streamsApi.put(`/streams/${formvalues.id}`, streamToSave)
   dispatch({ type: STREAM_IN_EDITION, payload: response.data })
 }
 
