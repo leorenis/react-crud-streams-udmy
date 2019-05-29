@@ -1,8 +1,9 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { Router, Switch, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import store from '../store/configureStore'
+import history from '../history'
 import StreamCreate from './Streams/StreamCreate'
 import StreamDelete from './Streams/StreamDelete'
 import StreamEdit from './Streams/StreamEdit'
@@ -13,7 +14,7 @@ import Header from './Header'
 const App = () => (
   <Provider store={store}>
     <div className={'ui container'}>
-      <BrowserRouter>
+      <Router history={history}>
         <Header />
         <Switch>
           <Route path={'/streams/delete'} component={StreamDelete} />
@@ -22,7 +23,7 @@ const App = () => (
           <Route exact path={'/streams/new'} component={StreamCreate} />
           <Route exact path={'/'} component={StreamList} />
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   </Provider>
 )
