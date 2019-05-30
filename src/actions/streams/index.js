@@ -1,4 +1,5 @@
 import streamsApi from '../../apis/streams'
+import history from '../../history'
 import {
   STREAM_IN_EDITION,
   STREAMS_FETCHED,
@@ -13,6 +14,7 @@ export const saveStream = formvalues => async (dispatch, getState) => {
     ? await streamsApi.post('/streams', streamToSave)
     : await streamsApi.put(`/streams/${formvalues.id}`, streamToSave)
   dispatch({ type: STREAM_IN_EDITION, payload: response.data })
+  history.push('/')
 }
 
 export const fetchStreams = () => async dispatch => {
