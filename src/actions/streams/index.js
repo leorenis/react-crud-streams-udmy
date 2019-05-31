@@ -7,12 +7,17 @@ import {
   DELETED_STREAM
 } from './types'
 
-export const saveStream = formvalues => async (dispatch, getState) => {
+export const createStream = formvalues => async (dispatch, getState) => {
   const { userId } = getState().auth
   const streamToSave = { ...formvalues, userId }
-  const response = !formvalues.id
-    ? await streamsApi.post('/streams', streamToSave)
-    : await streamsApi.put(`/streams/${formvalues.id}`, streamToSave)
+  const response = await streamsApi.post('/streams', streamToSave)
+  dispatch({ type: STREAM_IN_EDITION, payload: response.data })
+  history.push('/')
+}
+
+export const editStream = (id, formvalues) => async dispatch => {
+  // Obs: Remember -> PUT always update all properties of a record. Now change to PATCH -> Update SOME properties of a record.
+  const response = await streamsApi.patch(`/streams/${id}`, { ...formvalues })
   dispatch({ type: STREAM_IN_EDITION, payload: response.data })
   history.push('/')
 }
