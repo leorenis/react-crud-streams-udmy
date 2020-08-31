@@ -16,7 +16,7 @@ export const createStream = formvalues => async (dispatch, getState) => {
 }
 
 export const editStream = (id, formvalues) => async dispatch => {
-  // Obs: Remember -> PUT always update all properties of a record. Now change to PATCH -> Update SOME properties of a record.
+  // Obs: Remember -> PUT always update all properties of a record. Now change to PATCH -> Update SOME properties of a record...
   const response = await streamsApi.patch(`/streams/${id}`, { ...formvalues })
   dispatch({ type: STREAM_IN_EDITION, payload: response.data })
   history.push('/')
